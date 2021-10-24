@@ -16,6 +16,10 @@ import cartItems from './cart-items';
 
 import { createStore } from 'redux';
 
+// dispatch method - send actions to the store
+// actions (objects) - MUST HAVE TYPE PROPERTY - what kind of action
+// DON'T MUTATE THE STATE - redux built on IMMUTABILITY (copy)
+
 // initial store
 const initialStore = {
   count: 78,
@@ -24,9 +28,16 @@ const initialStore = {
 // reducer
 function reducer(state, action) {
   console.log({ state, action });
+  if (action.type === 'DECREASE') {
+    // state.count = state.count - 1 (mutates the state)
+    return { count: state.count - 1 };
+  }
   return state;
 }
+
+// store
 const store = createStore(reducer, initialStore);
+store.dispatch({ type: 'DECREASE' });
 console.log(store.getState());
 
 function App() {
