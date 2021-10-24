@@ -18,7 +18,7 @@ import { createStore } from 'redux';
 
 // initial store
 const initialStore = {
-  count: 0,
+  count: 78,
 };
 
 // reducer
@@ -27,13 +27,14 @@ function reducer(state, action) {
   return state;
 }
 const store = createStore(reducer, initialStore);
+console.log(store.getState());
 
 function App() {
   // cart setup
 
   return (
     <main>
-      <Navbar />
+      <Navbar cart={store.getState()} />
       <CartContainer cart={cartItems} />
     </main>
   );
