@@ -22,22 +22,32 @@ import { createStore } from 'redux';
 
 // initial store
 const initialStore = {
-  count: 78,
+  count: 0,
 };
 
 // reducer
 function reducer(state, action) {
   console.log({ state, action });
   if (action.type === 'DECREASE') {
-    // state.count = state.count - 1 (mutates the state)
     return { count: state.count - 1 };
   }
+  if (action.type === 'INCREASE') {
+    return { count: state.count + 1 };
+  }
+  if (action.type === 'RESET') {
+    return { count: 0 };
+  }
+
   return state;
 }
 
 // store
 const store = createStore(reducer, initialStore);
 store.dispatch({ type: 'DECREASE' });
+store.dispatch({ type: 'RESET' });
+store.dispatch({ type: 'INCREASE' });
+store.dispatch({ type: 'INCREASE' });
+
 console.log(store.getState());
 
 function App() {
