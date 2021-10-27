@@ -8,7 +8,14 @@ function reducer(state, action) {
     console.log('you decreased amount');
   }
   if (action.type === INCREASE) {
-    console.log('you increased amount');
+    let tempCart = state.cart.map((cartItem) => {
+      if (cartItem.id === action.payload.id) {
+        return { ...cartItem, amount: cartItem.amount + 1 };
+      }
+
+      return cartItem;
+    });
+    return { ...state, cart: tempCart };
   }
   if (action.type === REMOVE) {
     return {
